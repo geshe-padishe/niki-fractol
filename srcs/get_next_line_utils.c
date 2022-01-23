@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_so_long.h                                       :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 21:09:48 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/01/23 23:03:21 by ngenadie         ###   ########.fr       */
+/*   Created: 2020/10/25 16:04:54 by ngenadie          #+#    #+#             */
+/*   Updated: 2020/10/25 16:04:55 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "mlx.h"
-#include "dynarray.h"
 #include "get_next_line.h"
 
-typedef struct	s_mlx_data
+int	get_next_line2(char **str, char ***line, int nl_index, int len)
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	void			*img_ptr;
-	int				height;
-	int				width;
-	int				x;
-	int				y;
-}				t_mlx_data;
+	if (len < 0)
+		return (-1);
+	if ((nl_index = ft_nl_index(*str)) == 0 || nl_index == ft_strlen(*str))
+	{
+		if (!(*str = ft_send_clean(*line, *str, ft_strlen(*str))))
+			return (-1);
+		free(*str);
+		*str = NULL;
+	}
+	else if (!(*str = ft_send_clean(*line, *str, nl_index)))
+		return (-1);
+	if (len == 0 && *str == NULL)
+		return (0);
+	return (1);
+}
