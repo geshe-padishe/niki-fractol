@@ -26,11 +26,11 @@ all:			${NAME}
 $(NAME): $(OBJS)
 	make -C ${LIBFT_D}
 	cp ${LIBFT_D}/${LIBFT} .
-	$(CC) $(OBJS) libft.a libmlx_Linux.a \
+	$(CC) $(CFLAGS) $(OBJS) $(FLAGS) libmlx_Linux.a \
 	-Imlx -lXext -lX11 -lm -lz -Lmlx -lmlx -o $(EX_NAME)
 
 %.o: %.c ${HEADER_H}
-	$(CC) $(CFLAGS) libmlx_Linux.a \
+	$(CC) $(CFLAGS) $(FLAGS) libmlx_Linux.a \
 	-I/usr/bin -I${INC_D} -I${LIBFT_D} -Imlx -c $< -o $@
 
 clean:
@@ -42,3 +42,5 @@ fclean: clean
 				${RM} ${EX_NAME}
 
 re: 			fclean all
+
+.PHONY : all clean fclean re
