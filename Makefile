@@ -9,7 +9,8 @@ FLAGS			= -L ${LIBFT_D} -lft
 RM				= rm -f
 
 SRC_D			= srcs
-SRC_LIST		= ft_so_long.c get_next_line.c get_next_line_utils.c
+SRC_LIST		= ft_so_long.c get_next_line.c get_next_line_utils.c \
+				  ft_so_long2.c
 SRC_C			= $(addprefix ${SRC_D}/, ${SRC_LIST})
 
 INC_D			= includes

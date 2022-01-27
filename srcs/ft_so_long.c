@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 22:10:56 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/01/24 20:35:04 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/01/27 05:28:22 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int ft_draw_square(t_mlx_data data, char *path_string, int i, int j)
 {
-	printf("data_width = %i\ndata_height = %i\n",
-			data.width, data.height);
 	data.img_ptr = mlx_xpm_file_to_image(data.mlx_ptr, path_string,
 										&data.width, &data.height);
 	if (data.img_ptr == NULL)
@@ -38,23 +36,26 @@ int ft_draw_board(t_mlx_data data, t_dynarray darr)
 	{
 		while (board[i][j])
 		{
-			printf("board[i][j] = %c\n", board[i][j]);
+			printf("board[%lu][%lu] = %c\n", i, j, board[i][j]);
 			if (board[i][j] == 'P')
-				if (ft_draw_square(data, "./images/hero", i, j) == -1)
+				if (ft_draw_square(data, "./images/hero.xpm", j, i) == -1)
 					return (-1);
 			if (board[i][j] == '1')
-				if (ft_draw_square(data, "./images/rock", i, j) == -1)
+				if (ft_draw_square(data, "./images/rock.xpm", j, i) == -1)
 					return (-1);
 			if (board[i][j] == '0')
-				if (ft_draw_square(data, "./images/background", i, j) == -1)
+				if (ft_draw_square(data, "./images/background.xpm", j, i) == -1)
 					return (-1);
 			if (board[i][j] == 'E')
-				if (ft_draw_square(data, "./images/exit", i, j) == -1)
+				if (ft_draw_square(data, "./images/exit.xpm", j, i) == -1)
 					return (-1);
 			if (board[i][j] == 'C')
-				if (ft_draw_square(data, "./images/treasure", i, j) == -1)
+				if (ft_draw_square(data, "./images/treasure.xpm", j, i) == -1)
 					return (-1);
+			j++;
 		}
+		j = 0;
+		i++;
 	}
 	return (0);
 }
@@ -79,13 +80,20 @@ int ft_get_map(char **argv, t_dynarray *darr)
 	char	*s;
 
 	s = NULL;
-	if ((fd = open(argv[2], O_RDONLY)) == -1)
-		return (-1);
-	while ((ret = get_next_line(fd, &s)) == 1)
+	if (ft_verif_path(argv[2]) == 0)
 	{
-		if (ret == -1)
+		printf("invalid path");
+		return (-1);
+	}
+	fd = open(argv[2], O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	while (ft_get_map_ret(&ret, fd, &s) == 1)
+	{
+		printf("s = %p\n", s);
+		if (ret == -1 || s == NULL)
 		{
-			printf("ret: -1");
+			printf("gnl error");
 			return (-1);
 		}
 		if (push_dynarray(darr, &s, 1, 1) == -1)
@@ -103,7 +111,7 @@ int main(int argc, char **argv)
 	init_dynarray(&darr, 0, 8);
 	data.width = 48;
 	data.height = 48;
-
+//CHECK_FILE .BER 
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == NULL)
 		printf("failed to initialize mlx");
