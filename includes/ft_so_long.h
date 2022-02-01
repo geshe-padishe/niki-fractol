@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 21:09:48 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/01/27 05:27:29 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/01 22:10:15 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ typedef struct	s_mlx_data
 	void			*img_ptr;
 	int				height;
 	int				width;
+	int				nb_player;
+	int				nb_exit;
 	int				x;
 	int				y;
 }				t_mlx_data;
 
+void	ft_print_darr(t_dynarray darr);
 int	ft_get_map_ret(int *ret, int fd, char **s);
 int	ft_verif_path(char *path);
 int	ft_strcmp(char *str, char *str2);

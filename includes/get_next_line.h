@@ -6,14 +6,14 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:19:44 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/01/27 00:50:19 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/01/30 23:28:00 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1
 # endif
 
 # include <stdlib.h>
