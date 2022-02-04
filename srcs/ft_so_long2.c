@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 19:41:29 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/01 22:59:23 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/02 22:41:10 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_verif_path(char *path)
 	int	i;
 
 	i = 0;
+	if (path[i] == '.')
+		return (-1);
 	while (path[i] && path[i] != '.' && path[i + 1])
 		i++;
 	if (path[i] != '.')
@@ -55,4 +57,21 @@ void	ft_print_darr(t_dynarray darr)
 		dprintf(1, "line[%lu] = %s\n", i, ((char**)darr.list)[i]);
 		i++;
 	}
+}
+
+void	ft_free_all(t_dynarray *darr)
+{
+	uint64_t	i;
+
+	i = 0;
+	while (i < darr->nb_cells)
+	{
+		if (((char **)darr->list)[i])
+		{
+			free(((char **)darr->list)[i]);
+			((char **)darr->list)[i] = NULL;
+		}
+		i++;
+	}
+	free_dynarray(darr);
 }

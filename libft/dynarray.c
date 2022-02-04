@@ -6,7 +6,7 @@
 /*   By: nikotikcho <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:11:57 by nikotikch         #+#    #+#             */
-/*   Updated: 2021/11/02 15:54:29 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/02 22:13:09 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,15 @@ void	free_dynarray(t_dynarray *dynarray)
 	if (dynarray == NULL)
 		return ;
 	if (dynarray->list != NULL)
+	{
 		free(dynarray->list);
+		dynarray->list = NULL;
+	}
 	if (dynarray->tmp != NULL)
+	{
 		free(dynarray->tmp);
+		dynarray->tmp = NULL;
+	}
 	ft_memset(dynarray, 0, sizeof(t_dynarray));
 }
 
