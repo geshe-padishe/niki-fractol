@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 22:10:56 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/04 05:11:11 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:30:26 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int	ft_get_map(char **argv, t_dynarray *darr, t_mlx_data *data)
 		ft_count_obj(s, data);
 	}
 	if (darr->nb_cells < 3)
-		return (free(s), ft_free_all(darr), dprintf(1, "Map error\n"), -1);
+		return (ft_free(s), ft_free_all(darr), dprintf(1, "Map error\n"), -1);
 	if (data->nb_player != 1 || data->nb_collectibles < 1 || data->nb_exit != 1)
-		return (free(s), ft_free_all(darr), printf("missing or duplicate objects\n"), -1);
-	return (free(s), ft_verif_closed_rect(darr));
+		return (ft_free(s), ft_free_all(darr), printf("missing or duplicate objects\n"), -1);
+	return (ft_free(s), ft_verif_closed_rect(darr));
 }
 
 int	main(int argc, char **argv)
