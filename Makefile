@@ -2,7 +2,7 @@ NAME			= so_long_mlx
 EX_NAME			= so_long
 
 CC				= gcc
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror #-g3 -fsanitize=address
 GNL_FLAGS		= -D BUFFER_SIZE=42
 
 FLAGS			= -L ${LIBFT_D} -lft
@@ -10,7 +10,8 @@ RM				= rm -f
 
 SRC_D			= srcs
 SRC_LIST		= ft_so_long.c get_next_line.c get_next_line_utils.c \
-				  ft_so_long2.c ft_so_long3.c
+				  ft_so_long2.c ft_so_long3.c ft_so_long_hooks.c \
+				  ft_events.c ft_moves.c
 SRC_C			= $(addprefix ${SRC_D}/, ${SRC_LIST})
 
 INC_D			= includes

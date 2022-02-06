@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 22:10:56 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/04 17:30:26 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/06 05:16:04 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int	ft_draw_square(t_mlx_data data, char *path_string, int i, int j)
 {
-	data.img_ptr = mlx_xpm_file_to_image(data.mlx_ptr, path_string,
+	data.img_ptr = mlx_xpm_file_to_image(data.mlx, path_string,
 			&data.width, &data.height);
 	if (data.img_ptr == NULL)
 		return (-1);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr,
+	mlx_put_image_to_window(data.mlx, data.win,
 		data.img_ptr, i * 48, j * 48);
+	mlx_destroy_image(data.mlx, data.img_ptr);
 	return (0);
 }
 
@@ -85,7 +86,7 @@ int	ft_get_map(char **argv, t_dynarray *darr, t_mlx_data *data)
 		return (free_dynarray(darr), dprintf(1, "invalid path\n"), -1);
 	fd = open(argv[2], O_RDONLY);
 	if (fd == -1)
-		return (-1);
+		return (free_dynarray(darr), -1);
 	while (ft_get_map_ret(&ret, fd, &s) == 1)
 	{
 		if (ret == -1 || s == NULL)
@@ -115,21 +116,24 @@ int	main(int argc, char **argv)
 	data.height = 48;
 	if (init_dynarray(&darr, 1, 8))
 		return (dprintf(1, "init_dynarray fail"), -1);
+	data.darr = &darr;
 	if (ft_get_map(argv, &darr, &data) == -1)
 		return (dprintf(1, "get_map -1\n"), -1);
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
+	data.mlx = mlx_init();
+	if (data.mlx == NULL)
 		return (dprintf(1, "failed to initialize mlx"), -1);
 
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 48 * 20, 48 * 20, argv[1]);
-	if (data.win_ptr == NULL)
+	data.win = mlx_new_window(data.mlx, 48 * 20, 48 * 20, argv[1]);
+	if (data.win == NULL)
 		return (dprintf(1, "failed to initialize window"), -1);
 
-	data.img_ptr = mlx_new_image(data.mlx_ptr, 3000, 3000);
+	data.img_ptr = mlx_new_image(data.mlx, 48 * 20, 48 * 20);
 	if (data.img_ptr == NULL)
 		return (dprintf(1, "failed to create image"), -1);
-
+	data.big_img_ptr = data.big_img_ptr;
 	if (ft_draw_board(data, darr) == -1)
 		return (dprintf(1, "draw_board: -1"), -1);
-	mlx_loop(data.mlx_ptr);
+	mlx_hook(data.win, 2, 1L << 0, ft_key_hook, &data);
+	mlx_hook(data.win, 33, 131072, &ft_close_win, &data);
+	mlx_loop(data.mlx);
 }
