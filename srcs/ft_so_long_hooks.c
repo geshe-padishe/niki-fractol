@@ -3,9 +3,9 @@
 int	ft_close_win(t_mlx_data *data, t_dynarray *darr)
 {
 	ft_free_all(darr);
+	mlx_destroy_image(data->mlx, data->big_img_ptr);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
-//	mlx_destroy_image(data->mlx, data->big_img_ptr);
 	free(data->mlx);
     exit (EXIT_SUCCESS);
 }

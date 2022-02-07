@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 22:10:56 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/06 05:16:04 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/07 21:48:00 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	main(int argc, char **argv)
 	data.img_ptr = mlx_new_image(data.mlx, 48 * 20, 48 * 20);
 	if (data.img_ptr == NULL)
 		return (dprintf(1, "failed to create image"), -1);
-	data.big_img_ptr = data.big_img_ptr;
+	data.big_img_ptr = data.img_ptr;
 	if (ft_draw_board(data, darr) == -1)
 		return (dprintf(1, "draw_board: -1"), -1);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_hook, &data);
