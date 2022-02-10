@@ -1,4 +1,4 @@
-NAME			= so_long_mlx
+NAME			= so_long
 EX_NAME			= so_long
 
 CC				= gcc
@@ -11,7 +11,7 @@ RM				= rm -f
 SRC_D			= srcs
 SRC_LIST		= ft_so_long.c get_next_line.c get_next_line_utils.c \
 				  ft_so_long2.c ft_so_long3.c ft_so_long_hooks.c \
-				  ft_events.c ft_moves.c
+				  ft_events.c ft_moves.c ft_so_long4.c
 SRC_C			= $(addprefix ${SRC_D}/, ${SRC_LIST})
 
 INC_D			= includes
@@ -26,14 +26,19 @@ OBJS			= ${SRC_C:.c=.o}
 
 all:			${NAME}
 
-$(NAME): $(OBJS)
-	make -C ${LIBFT_D}
-	cp ${LIBFT_D}/${LIBFT} .
+${LIBFT}:
+				make -C ${LIBFT_D}
+				cp ${LIBFT_D}/${LIBFT} .
+
+${NAME}:		${LIBFT} $(OBJS)
+
+
+so_long:	${HEADER_H} $(SRC_C)
 	$(CC) $(CFLAGS) -I$(INC_D) $(OBJS) $(FLAGS) $(LIBFT) libmlx_Linux.a \
 	-L. -Llib -Imlx -lXext -lX11 -lm -lz -Lmlx -lmlx -o $(EX_NAME)
 
 %.o: %.c ${HEADER_H}
-	$(CC) $(CFLAGS) $(FLAGS) $(LIBFT) -L. libmlx_Linux.a \
+	$(CC) $(CFLAGS) -L. -Llib -lXext -lmlx -lm -lz -lX11 \
 	-I/usr/bin -I${INC_D} -I${LIBFT_D} -Imlx -c $< -o $@
 
 clean:

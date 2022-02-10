@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:19:44 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/01/30 23:28:00 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/10 04:59:18 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 # include <stdlib.h>
 # include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
+# include <unistd.h>
+# include <string.h>
+# include <stdio.h>
 
 int		get_next_line(int fd, char **s);
 int		get_next_line2(char **str, char ***line, int nl_index, int len);

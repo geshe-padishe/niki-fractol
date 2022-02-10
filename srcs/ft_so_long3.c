@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_so_long3.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 03:44:03 by ngenadie          #+#    #+#             */
+/*   Updated: 2022/02/10 03:44:05 by ngenadie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_so_long.h"
 
 void	ft_free(char *s)
@@ -24,22 +36,8 @@ int	ft_verif_rect(t_dynarray *darr)
 	return (0);
 }
 
-int	ft_verif_closed_rect(t_dynarray *darr)
+int	ft_verif_closed_rect2(t_dynarray *darr, char **map, int i, uint64_t j)
 {
-	char			**map;
-	int				i;
-	uint64_t		j;
-
-	i = 0;
-	j = 1;
-	map = (char **)darr->list;
-	while (map[0][i])
-	{
-		if (map[0][i] != '1')
-			return (printf("map not closed"), ft_free_all(darr), -1);
-		i++;
-	}
-	i = 0;
 	while (j < darr->nb_cells - 1 && map[j][i])
 	{
 		if (map[j][0] != '1')
@@ -58,6 +56,25 @@ int	ft_verif_closed_rect(t_dynarray *darr)
 		i++;
 	}
 	return (ft_verif_rect(darr));
+}
+
+int	ft_verif_closed_rect(t_dynarray *darr)
+{
+	char			**map;
+	int				i;
+	uint64_t		j;
+
+	i = 0;
+	j = 1;
+	map = (char **)darr->list;
+	while (map[0][i])
+	{
+		if (map[0][i] != '1')
+			return (printf("map not closed"), ft_free_all(darr), -1);
+		i++;
+	}
+	i = 0;
+	return (ft_verif_closed_rect2(darr, map, i, j));
 }
 
 int	ft_count_obj(char *s, t_mlx_data *data)

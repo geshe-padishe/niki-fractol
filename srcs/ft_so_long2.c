@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 19:41:29 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/04 04:51:19 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:14:49 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int	ft_verif_path(char *path)
 
 void	ft_print_darr(t_dynarray darr)
 {
-	uint64_t i;
+	uint64_t	i;
 
 	i = 0;
 	dprintf(1, "nb_cells = %lu\n", darr.nb_cells);
 	while (i < darr.nb_cells)
 	{
-		dprintf(1, "line[%lu] = %s\n", i, ((char**)darr.list)[i]);
+		dprintf(1, "line[%lu] = %s\n", i, ((char **)darr.list)[i]);
 		i++;
 	}
 }

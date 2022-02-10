@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 16:04:54 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/07 21:45:28 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/08 20:54:35 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -14,7 +14,7 @@
 int	get_next_line2(char **str, char ***line, int nl_index, int len)
 {
 	if (len < 0)
-		return (-1);
+		return (free(*str), -1);
 	nl_index = ft_nl_index(*str);
 	if (nl_index == 0 || nl_index == ft_strlen(*str))
 	{
