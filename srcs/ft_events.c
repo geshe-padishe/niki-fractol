@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 21:15:21 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/10 05:21:57 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/18 01:44:53 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	ft_walk(t_mlx_data *data, t_dynarray *darr, uint64_t i, uint64_t j)
 	ft_player_coord(data, darr);
 }
 
-void	ft_exit(t_mlx_data *data, t_dynarray *darr)
+void	ft_exit(t_mlx_data *data)
 {
 	if (data->nb_collectibles == data->nb_collected)
 	{
 		ft_putnbr(data->moves);
 		write(1, "\n", 1);
-		ft_close_win(data, darr);
+		ft_close_win(data);
 	}
 }
 

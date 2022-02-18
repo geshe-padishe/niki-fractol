@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 21:09:48 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/10 05:22:20 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/18 01:45:20 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	ft_move_left(t_mlx_data *data, t_dynarray *darr);
 void	ft_move_down(t_mlx_data *data, t_dynarray *darr);
 void	ft_collect(t_mlx_data *data, t_dynarray *darr, uint64_t i, uint64_t j);
 void	ft_walk(t_mlx_data *data, t_dynarray *darr, uint64_t i, uint64_t j);
-void	ft_exit(t_mlx_data *data, t_dynarray *darr);
-int		ft_close_win(t_mlx_data *data, t_dynarray *darr);
+void	ft_exit(t_mlx_data *data);
+int		ft_close_win(t_mlx_data *data);
 void	ft_player_coord(t_mlx_data *data, t_dynarray *darr);
 void	ft_move(t_mlx_data *data, t_dynarray *darr, uint64_t i, uint64_t j);
 int		ft_key_hook(int key, t_mlx_data *data);

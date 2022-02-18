@@ -6,15 +6,15 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 21:08:23 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/10 04:17:37 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/18 01:45:30 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_so_long.h"
 
-int	ft_close_win(t_mlx_data *data, t_dynarray *darr)
+int	ft_close_win(t_mlx_data *data)
 {
-	ft_free_all(darr);
+	ft_free_all(data->darr);
 	mlx_destroy_image(data->mlx, data->big_img_ptr);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
@@ -57,14 +57,14 @@ void	ft_move(t_mlx_data *data, t_dynarray *darr, uint64_t i, uint64_t j)
 	if (board[i][j] == '0')
 		ft_walk(data, darr, i, j);
 	if (board[i][j] == 'E')
-		ft_exit(data, darr);
+		ft_exit(data);
 }
 
 int	ft_key_hook(int key, t_mlx_data *data)
 {
 	ft_player_coord(data, data->darr);
 	if (key == ESC)
-		ft_close_win(data, data->darr);
+		ft_close_win(data);
 	if (key == RIGHT)
 		ft_move_right(data, data->darr);
 	if (key == LEFT)
