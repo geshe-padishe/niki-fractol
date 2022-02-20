@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 21:09:48 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/18 01:45:20 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/20 04:28:15 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_mlx_data
 	void			*big_img_ptr;
 }				t_mlx_data;
 
-void	ft_print_darr(t_dynarray darr);
+/*void	ft_print_darr(t_dynarray darr);*/
 int		ft_get_map_ret(int *ret, int fd, char **s);
 int		ft_verif_path(char *path);
 int		ft_strcmp(char *str, char *str2);
@@ -69,7 +69,7 @@ int		ft_verif_map(char *s);
 int		ft_get_map(char **argv, t_dynarray *darr, t_mlx_data *data);
 int		ft_verif_closed_rect2(t_dynarray *darr, char **map, int i, uint64_t j);
 int		ft_draw(t_mlx_data data, char **board, uint64_t i, uint64_t j);
-void	ft_print_error(void);
+void	ft_print_error(int erreur);
 int		display(t_mlx_data *data, t_dynarray *darr, char **argv);
 void	ft_putnbr(int pid);
 

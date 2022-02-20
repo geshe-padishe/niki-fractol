@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 22:10:56 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/02/10 04:30:54 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:36:27 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_get_map(char **argv, t_dynarray *darr, t_mlx_data *data)
 			return (ft_free(s), ft_free_all(darr), -1);
 		if (ft_verif_map(s))
 			return (ft_free(s), ft_free_all(darr), -1);
-		if (push_dynarray(darr, &s, 1, 1) == -1)
+		if (push_dynarray(darr, &s, 1, 0) == -1)
 			return (ft_free(s), ft_free_all(darr), -1);
 		ft_count_obj(s, data);
 	}
@@ -98,18 +98,18 @@ int	main(int argc, char **argv)
 	t_dynarray	darr;
 
 	if (argc != 3)
-		return (ft_print_error(), -1);
+		return (ft_print_error(2), -1);
 	ft_memset(&data, 0, sizeof(data));
 	data.width = 48;
 	data.height = 48;
 	if (init_dynarray(&darr, 1, 8))
-		return (ft_print_error(), -1);
+		return (ft_print_error(1), -1);
 	data.darr = &darr;
 	if (ft_get_map(argv, &darr, &data) == -1)
-		return (ft_print_error(), -1);
+		return (ft_print_error(3), -1);
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
-		return (ft_print_error(), -1);
+		return (ft_print_error(5), -1);
 	if (display(&data, &darr, argv) == -1)
 		return (-1);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_hook, &data);

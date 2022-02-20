@@ -22,24 +22,26 @@ LIBFT			= libft.a
 LIBFT_D			= libft
 LIBFT_A			= $(addprefix ${LIBFT_D}/, ${LIBFT})
 
+LIBMLX			= libmlx_Linux.a
 OBJS			= ${SRC_C:.c=.o}
 
 all:			${NAME}
 
-${LIBFT}:
+${NAME}:		${OBJS}
 				make -C ${LIBFT_D}
 				cp ${LIBFT_D}/${LIBFT} .
+				make -C libmlx
+				cp libmlx/libmlx_Linux.a .
+				${CC} $(CFLAGS) -I$(INC_D) $(OBJS) $(FLAGS) $(LIBFT) libmlx_Linux.a \
+				-L. -Llibmlx -Ilibmlx -lXext -lX11 -lm -lz -lmlx -o ${NAME}
 
-${NAME}:		${LIBFT} $(OBJS)
-
-
-so_long:	${HEADER_H} $(SRC_C)
-	$(CC) $(CFLAGS) -I$(INC_D) $(OBJS) $(FLAGS) $(LIBFT) libmlx_Linux.a \
-	-L. -Llib -Imlx -lXext -lX11 -lm -lz -Lmlx -lmlx -o $(EX_NAME)
+#so_long:		${HEADER_H} $(SRC_C)
+#	$(CC) $(CFLAGS) -I$(INC_D) $(OBJS) $(FLAGS) $(LIBFT) libmlx_Linux.a \
+#	-L. -Llibmlx -Ilibmlx -lXext -lX11 -lm -lz -lmlx -o $(EX_NAME)
 
 %.o: %.c ${HEADER_H}
 	$(CC) $(CFLAGS) -L. -Llib -lXext -lmlx -lm -lz -lX11 \
-	-I/usr/bin -I${INC_D} -I${LIBFT_D} -Imlx -c $< -o $@
+	-I/usr/bin -I${INC_D} -I${LIBFT_D} -Ilibmlx -c $< -o $@
 
 clean:
 				$(MAKE) -C ${LIBFT_D} clean
@@ -47,7 +49,8 @@ clean:
 
 fclean: clean
 				$(MAKE) -C ${LIBFT_D} fclean
-				${RM} ${EX_NAME}
+				$(MAKE) -C libmlx clean
+				${RM} ${EX_NAME} ${LIBFT} libmlx_Linux.a
 
 re: 			fclean all
 
